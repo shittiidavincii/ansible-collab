@@ -1,0 +1,8 @@
+consumers:
+  vars:
+    dirsrv_replication_role: consumer
+
+  pdc1-test-consumer.ldap.ray.com:
+    
+
+

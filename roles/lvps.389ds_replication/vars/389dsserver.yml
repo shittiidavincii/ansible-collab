@@ -1,0 +1,29 @@
+dirsrv_product: "@redhat-ds:11"
+dirsrv_port: 389
+dirsrv_suffix: "dc=com"
+
+
+## maybe other suffixes?
+dissrv_othersuffixes: "o=ds,o=rtx,o=archive,o=statistics,"
+
+## post other-suffixes
+
+#dirsrv_fqdn: # default {{ ansible_nodename}}
+
+dirsrv_serverid: dirsrv
+dirsrv_listen_host:
+dirsrv_secure_listen_host:
+# dirsrv_server_uri: # default ldap://localhost
+
+# dirsrv_factory
+# Default: false · Can be changed: Yes
+
+# Keep factory defaults about authentication and logging parameters. 
+# If true, dirsrv_logging, dirsrv_simple_auth_enabled, 
+# dirsrv_password_storage_scheme, dirsrv_ldapi_enabled, 
+# dirsrv_sasl_plain_enabled will be completely ignored.
+
+## 
+dirsrv_install_additional_ldif:
+dirsrv_install_additional_ldif_dir:
+

@@ -1,0 +1,9 @@
+---
+suppliers:
+  vars: 
+    dirsrv_replica_role: supplier
+
+  pdc1-test-supplier:
+    host: pdc1-test-supplier.ldap.ray.com
+    dirsrv_supplier_replica_id: 10
+  

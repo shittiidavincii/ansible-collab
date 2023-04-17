@@ -1,0 +1,30 @@
+---
+- hosts: mm1
+  become: true
+  roles:
+    -
+      role: lvps.389ds_replication
+      dirsrv_replica_role: 'both'
+      dirsrv_suffix: "dc=example,dc=local"
+      dirsrv_server_uri: "ldap://localhost"
+      dirsrv_rootdn_password: secret1
+      dirsrv_replication_user_password: "aaaaaa"
+      dirsrv_replication_user_password_remote: "bbbbbb" # On the other server
+      dirsrv_consumer_uri: "ldap://mm2.example.local:389/" # The other server
+      dirsrv_supplier_replica_id: 1
+
+
+- hosts: mm2
+  become: true
+  roles:
+    -
+      role: lvps.389ds_replication
+      dirsrv_replica_role: 'both'
+      dirsrv_suffix: "dc=example,dc=local"
+      dirsrv_server_uri: "ldap://localhost"
+      dirsrv_rootdn_password: secret2
+      dirsrv_replication_user_password: "bbbbbb"
+      dirsrv_replication_user_password_remote: "aaaaaa" # On the other server
+      dirsrv_consumer_uri: "ldap://mm1.example.local:389/" # The other server
+      dirsrv_supplier_replica_id: 2
+...

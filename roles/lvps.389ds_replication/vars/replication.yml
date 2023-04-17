@@ -1,0 +1,27 @@
+# Role of this server: 
+# 'supplier', 'consumer' or 'both' (master). Hub is not supported.
+dirsv_replication_role: 
+
+
+
+
+dirsrv_product: "@redhat-ds:11"
+dirsrv_port: 389
+dirsrv_suffix: "dc=com"
+
+
+## maybe other suffixes?
+dirsrv_othersuffixes: "o=ds,o=rtx,o=archive,o=statistics,"
+dirsrv_server_uri: # defaults to localhost
+## post other-suffixes
+dirsrv_rootdn_password: # vaulted from ansible
+dirsrv_use_starttls: false
+dirsrv_tls_certificate_trusted: false
+dirsrv_serverid: dirsrv
+# dirsrv_supplier_replica_id: ## grab from hostvars
+# dirsrv_replication_user_password_remote: grab from vault
+dirsrv_replica_bind_method: "SIMPLE"
+# # dirsrv_replica_attributes_list: grab from file
+# dirsrv_consumer_referral_to_supplier: # default: "ldap://supplier.example.com:389/"
+
+
