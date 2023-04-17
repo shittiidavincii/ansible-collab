@@ -1,0 +1,36 @@
+---
+dirsrv_server_uri: "ldap://localhost"
+dirsrv_rootdn: "cn=Directory Manager"
+# dirsrv_rootdn_password: secret
+dirsrv_use_starttls: true
+dirsrv_tls_certificate_trusted: true
+
+dirsrv_serverid: default
+dirsrv_suffix: dc=example,dc=local
+
+# SIMPLE, PLAIN, SASL.
+dirsrv_replica_bind_method: 'PLAIN'
+
+#####################
+# Supplier settings #
+#####################
+
+dirsrv_supplier_replica_id: 1  # For suppliers: 1 to 65534
+# dirsrv_consumer_uri: "ldap://consumer.example.com:389/"
+# dirsrv_replication_user_remote: Replication Manager
+# dirsrv_replication_user_password_remote: even-more-secret
+dirsrv_changelog_max_age: "10d"
+
+# By default nothing is excluded, but those are used in the examples. Probably there's a good reason for why they are excluded.
+dirsrv_replica_attributes_list: "(objectclass=*) $ EXCLUDE authorityRevocationList accountUnlockTime memberof"
+dirsrv_replica_attributes_list_total: "(objectclass=*) $ EXCLUDE accountUnlockTime"
+
+#####################
+# Consumer settings #
+#####################
+
+# Example used throughout section 15 of the Administration Guide
+dirsrv_replication_user: Replication Manager
+# dirsrv_replication_user_password: even-more-secret
+dirsrv_begin_replication_immediately: true
+# dirsrv_consumer_referral_to_supplier: "ldap://supplier.example.com:389/"

@@ -1,0 +1,7 @@
+consumers:
+  vars:
+  dirsrv_replica_role: consumers
+  host: 
+    vars: 
+
+Co-authored-by: Jamie  White <jamie.parris.white@gmail.com>

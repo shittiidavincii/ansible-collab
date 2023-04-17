@@ -1,0 +1,37 @@
+---
+- name: Decide if server is supplier or consumer
+  set_fact:
+    dirsrv_instance_is_consumer: "{{ dirsrv_replica_role == 'consumer' or dirsrv_replica_role == 'both' }}"
+    dirsrv_instance_is_supplier: "{{ dirsrv_replica_role == 'supplier' or dirsrv_replica_role == 'both' }}"
+
+- name: Check that replica role is correctly configured
+  assert:
+    that:
+      - dirsrv_instance_is_consumer or dirsrv_instance_is_supplier
+    msg: "This server is neither a consumer nor a supplier. Check that \"dirsrv_replica_role\" is set correctly."
+
+# There are 3 possible configurations:
+# Supplier ONLY: ✔ changelog, ✔ supplier config, ✘ consumer config, ✔ replication agreement, ✘ replication user.
+# Consumer ONLY: ✘ changelog, ✘ supplier config, ✔ consumer config, ✘ replication agreement, ✔ replication user.
+# Both (master): ✔ changelog, ✔ supplier config, ✘ consumer config, ✔ replication agreement, ✔ replication user.
+# And there's a fourth one, hub, not supported by this role.
+
+# Supplier or master/both
+- include: configure_changelog.yml
+  when: dirsrv_instance_is_supplier
+
+# Consumer or master/both
+- include: configure_replication_user.yml
+  when: dirsrv_instance_is_consumer
+
+# Consumer
+- include: configure_consumer.yml
+  when: dirsrv_instance_is_consumer and not dirsrv_instance_is_supplier
+
+# Supplier or master/both
+- include: configure_supplier.yml
+  when: dirsrv_instance_is_supplier
+
+# Supplier or master/both
+- include: configure_replication_agreement.yml
+  when: dirsrv_instance_is_supplier
